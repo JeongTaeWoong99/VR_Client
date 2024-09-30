@@ -20,4 +20,9 @@ public class RepeatedMovement : MonoBehaviour
         float movement = Mathf.Sin(Time.time * speed) * movementRange;
         transform.position = new Vector3(startPosition.x + movement, startPosition.y, startPosition.z);
     }
+
+    public void Test()
+    {
+        
+    }
 }
