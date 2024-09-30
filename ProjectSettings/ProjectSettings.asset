@@ -166,7 +166,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.FrozenMist.FMETP
-    Standalone: com.FrozenMist.FMETP
+    Standalone: com.VRBC.VR-Game
     iPhone: com.FrozenMist.ExhibitionPackT001
   buildNumber:
     Standalone: 0
