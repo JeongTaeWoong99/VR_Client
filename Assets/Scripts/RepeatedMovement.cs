@@ -24,5 +24,6 @@ public class RepeatedMovement : MonoBehaviour
     public void Test()
     {
         Debug.Log("테스트");
+        Debug.Log("테스트2");
     }
 }
