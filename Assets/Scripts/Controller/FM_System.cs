@@ -3,9 +3,9 @@ using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 
-public class PunSystem : MonoBehaviour
+public class FM_System : MonoBehaviour
 {
-    public static PunSystem instance;
+    public static FM_System instance;
 
     public PhotonView _photonView;
 
@@ -32,8 +32,5 @@ public class PunSystem : MonoBehaviour
         {
             Debug.Log("CMS 없음 + RPC 실행 X");
         }
-        
-        // 서버 브렌치
-        // 서버 브렌치 2 추가
     }
 }
