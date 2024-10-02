@@ -17,6 +17,6 @@ public class RoomButton : MonoBehaviour
     // 룸 버튼이 눌리는 순간, JoinRoom()함수에, info를 넣어서 실행
     public void OpenRoom()
     {
-        Launcher.instance.JoinRoom(info);
+        PunSystem.instance.JoinRoom(info);
     }
 }

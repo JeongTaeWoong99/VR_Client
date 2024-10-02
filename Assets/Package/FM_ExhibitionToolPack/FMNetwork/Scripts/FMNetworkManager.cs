@@ -425,7 +425,7 @@ public class FMNetworkManager : MonoBehaviour
         // ★ 연결된 상태라면, 이미지를 보내도록, PunSystem 스크립트 SendMessage 함수 호출
         if (PhotonNetwork.IsConnected)
         {
-            PunSystem.instance.SendMessage(_byteData,"VideoShare");
+            FM_System.instance.SendMessage(_byteData,"VideoShare");
         }
     }
 

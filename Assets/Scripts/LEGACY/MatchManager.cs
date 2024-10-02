@@ -454,24 +454,24 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
             if(PhotonNetwork.IsMasterClient)
             {
                 // 같은 맵 진행(true 다른맵 가능, false 같은맵만 진행)
-                if (!Launcher.instance.changeMapBetweenRounds)
+                if (!PunSystem.instance.changeMapBetweenRounds)
                 {
                     NextMatchSend();
                 }
                 // 다른 맵 진행 
                 else
                 {
-                    int newLevel = Random.Range(0, Launcher.instance.allMaps.Length);
+                    int newLevel = Random.Range(0, PunSystem.instance.allMaps.Length);
     
                     // 새로운 match맵의 이름과, 현재씬의 이름이 같으면, NextMatchSend(); 과정을 거쳐야 함.
-                    if(Launcher.instance.allMaps[newLevel] == SceneManager.GetActiveScene().name)
+                    if(PunSystem.instance.allMaps[newLevel] == SceneManager.GetActiveScene().name)
                     {
                         NextMatchSend();
                     }
                     // 하지만, 새로운 메치의 맵이 다르면, 그 sceen을 로드하면 된다. 
                     else
                     {
-                        PhotonNetwork.LoadLevel(Launcher.instance.allMaps[newLevel]);
+                        PhotonNetwork.LoadLevel(PunSystem.instance.allMaps[newLevel]);
                     }
                 }
             }
