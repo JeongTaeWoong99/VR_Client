@@ -5,9 +5,9 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 
-public class Launcher : MonoBehaviourPunCallbacks
+public class PunSystem : MonoBehaviourPunCallbacks
 {
-    public static Launcher instance;
+    public static PunSystem instance;
     
     public GameObject loadingScreen;
     public TMP_Text   loadingText;
@@ -134,7 +134,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         if(!string.IsNullOrEmpty(roomNameInput.text))
         {
             RoomOptions options = new RoomOptions();
-            options.MaxPlayers = 8;
+            options.MaxPlayers  = 20;
 
             PhotonNetwork.CreateRoom(roomNameInput.text, options); // 방생성 및 설정된 옵션 전달
 
@@ -183,7 +183,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // }
         
         RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 8;
+        options.MaxPlayers  = 20;
             
         PhotonNetwork.CreateRoom(selectedRoomName.text, options); // 방생성 및 설정된 옵션 전달
         
@@ -279,7 +279,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         menuButtons.SetActive(true);
     }
     
-    // 만든 방 삭제 및  삭제가 완료되면, Lobby로 다시 접속(Room -> Lobby)
+    // 버튼함수
+    // 만든 방 삭제 및 삭제가 완료되면, Lobby로 다시 접속(Room -> Lobby)
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
@@ -287,7 +288,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         loadingText.text = "Leaving Room";
         loadingScreen.SetActive(true);
     }
-
+    
     // 접속한 방을 떠나면, 호출됨.
     public override void OnLeftRoom()
     {
@@ -379,16 +380,16 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
     
-    public void QuickJoin()
-    {
-        RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 8;
-
-        PhotonNetwork.CreateRoom("Test", options, TypedLobby.Default);
-        CloseMenus();
-        loadingText.text = "Creating Room";
-        loadingScreen.SetActive(true);
-    }
+    // public void QuickJoin()
+    // {
+    //     RoomOptions options = new RoomOptions();
+    //     options.MaxPlayers  = 20;
+    //
+    //     PhotonNetwork.CreateRoom("Test", options, TypedLobby.Default);
+    //     CloseMenus();
+    //     loadingText.text = "Creating Room";
+    //     loadingScreen.SetActive(true);
+    // }
 
     public void QuitGame()
     {
