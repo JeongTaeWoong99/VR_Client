@@ -395,4 +395,8 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
+
+
+
+    // 메인 <- 클라 머지 확인용 주석
 }
