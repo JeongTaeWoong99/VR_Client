@@ -33,6 +33,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             Symbol,
             URL,
             Email,
+            korean,
         }
 
         #region Callbacks
@@ -106,6 +107,11 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         public Image AlphaKeyboard = null;
 
         /// <summary>
+        /// 한국어 키보드 패널.
+        /// </summary>
+        public Image KoreanKeyboard = null;
+
+        /// <summary>
         /// The panel that contains the number and symbol keys.
         /// </summary>
         public Image SymbolKeyboard = null;
@@ -114,6 +120,11 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         /// References abc bottom panel.
         /// </summary>
         public Image AlphaSubKeys = null;
+
+        /// <summary>
+        /// References Korean bottom panel.
+        /// </summary>
+        public Image KoreanSubKeys = null;
 
         /// <summary>
         /// References .com bottom panel.
@@ -499,7 +510,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             scale = Mathf.Clamp(scale, m_MinScale, m_MaxScale);
             transform.localScale = m_StartingScale * scale;
 
-            Debug.LogFormat("Setting scale: {0} for distance: {1}", scale, distance);
+            //Debug.LogFormat("Setting scale: {0} for distance: {1}", scale, distance);
         }
 
         /// <summary>
@@ -539,6 +550,15 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                 case LayoutType.Symbol:
                 {
                     ShowSymbolKeyboard();
+                    break;
+                }
+                /// <summary>
+                /// 한국어 케이스 추가.
+                /// </summary>
+                case LayoutType.korean:
+                {
+                    ShowKoreanKeyboard();
+                    TryToShowKoreanSubkeys();
                     break;
                 }
 
@@ -657,7 +677,15 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 
                 case KeyboardKeyFunc.Function.ABC:
                 {
-                    ActivateSpecificKeyboard(m_LastKeyboardLayout);
+                    ActivateSpecificKeyboard(LayoutType.Alpha);
+                    break;
+                }
+                /// <summary>
+                /// 한국어로 전환 추가.
+                /// </summary>
+                case KeyboardKeyFunc.Function.Korean:
+                {
+                    ActivateSpecificKeyboard(LayoutType.korean);
                     break;
                 }
 
@@ -723,6 +751,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                     Backspace();
                     break;
                 }
+                
 
                 case KeyboardKeyFunc.Function.UNDEFINED:
                 {
@@ -951,6 +980,14 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             AlphaKeyboard.gameObject.SetActive(true);
             m_LastKeyboardLayout = LayoutType.Alpha;
         }
+        /// <summary>
+        /// 한국어 키보드 활성화.
+        /// </summary>
+        public void ShowKoreanKeyboard()
+        {
+            KoreanKeyboard.gameObject.SetActive(true);
+            m_LastKeyboardLayout = LayoutType.korean;
+        }
 
         /// <summary>
         /// Show the default subkeys only on the Alphanumeric keyboard.
@@ -961,6 +998,23 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             if (AlphaKeyboard.IsActive())
             {
                 AlphaSubKeys.gameObject.SetActive(true);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Show the default subkeys only on the Alphanumeric keyboard.
+        /// </summary>
+        /// <returns>Returns true if default subkeys were activated, false if alphanumeric keyboard isn't active</returns>
+        private bool TryToShowKoreanSubkeys()
+        {
+            if (KoreanKeyboard.IsActive())
+            {
+                KoreanSubKeys.gameObject.SetActive(true);
                 return true;
             }
             else
@@ -1015,15 +1069,18 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 
         /// <summary>
         /// Disable GameObjects for all keyboard elements.
+        /// 한국어 추가
         /// </summary>
         private void DisableAllKeyboards()
         {
             AlphaKeyboard.gameObject.SetActive(false);
+            KoreanKeyboard.gameObject.SetActive(false);
             SymbolKeyboard.gameObject.SetActive(false);
 
             AlphaWebKeys.gameObject.SetActive(false);
             AlphaMailKeys.gameObject.SetActive(false);
             AlphaSubKeys.gameObject.SetActive(false);
+            KoreanSubKeys.gameObject.SetActive(false);
         }
 
         /// <summary>
