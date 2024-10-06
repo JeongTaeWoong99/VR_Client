@@ -35,6 +35,9 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             Backspace,
 
             UNDEFINED,
+
+            //한국어 추가
+            Korean,
         }
 
         /// <summary>
