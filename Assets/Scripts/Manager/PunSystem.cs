@@ -63,7 +63,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings(); // PhotonServerSettings 파일의 설정들로 네트워킹을 세팅한다.
         }                                         // 네트워크가 정상적으로 접속되면, OnConnectedToMaster() 함수가 호출된다;
-
 // #if UNITY_EDITOR
 //         roomTestButton.SetActive(true);
 // #endif
