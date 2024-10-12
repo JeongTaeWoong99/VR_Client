@@ -94,6 +94,14 @@ public class PunSystem : MonoBehaviourPunCallbacks
 
         loadingText.text = "Joining Lobby...";
     }
+    //서버접속 실패시 재시도
+    public override void OnDisconnected(DisconnectCause cause) {
+        // 접속 정보 표시
+        loadingText.text = "Offline : Retry Connecting To Master Server...";
+
+        // 마스터 서버로의 재접속 시도
+        PhotonNetwork.ConnectUsingSettings();
+    }
 
     // 로비입장 완료시 호출
     public override void OnJoinedLobby()
