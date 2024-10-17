@@ -63,9 +63,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings(); // PhotonServerSettings 파일의 설정들로 네트워킹을 세팅한다.
         }                                         // 네트워크가 정상적으로 접속되면, OnConnectedToMaster() 함수가 호출된다;
-// #if UNITY_EDITOR
-//         roomTestButton.SetActive(true);
-// #endif
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -95,7 +92,8 @@ public class PunSystem : MonoBehaviourPunCallbacks
         loadingText.text = "Joining Lobby...";
     }
     //서버접속 실패시 재시도
-    public override void OnDisconnected(DisconnectCause cause) {
+    public override void OnDisconnected(DisconnectCause cause) 
+    {
         // 접속 정보 표시
         loadingText.text = "Offline : Retry Connecting To Master Server...";
 
@@ -128,28 +126,28 @@ public class PunSystem : MonoBehaviourPunCallbacks
         }
     }
 
-    // 버튼 함수
-    public void OpenRoomCreate()
-    {
-        CloseMenus();
-        createRoomScreen.SetActive(true);
-    }
-
-    public void CreateRoom()
-    {
-        // 방제가 비어있는지 확인
-        if(!string.IsNullOrEmpty(roomNameInput.text))
-        {
-            RoomOptions options = new RoomOptions();
-            options.MaxPlayers  = 20;
-
-            PhotonNetwork.CreateRoom(roomNameInput.text, options); // 방생성 및 설정된 옵션 전달
-
-            CloseMenus();
-            loadingText.text = "Creating Room...";
-            loadingScreen.SetActive(true);
-        }
-    }
+    // // 버튼 함수
+    // public void OpenRoomCreate()
+    // {
+    //     CloseMenus();
+    //     createRoomScreen.SetActive(true);
+    // }
+    //
+    // public void CreateRoom()
+    // {
+    //     // 방제가 비어있는지 확인
+    //     if(!string.IsNullOrEmpty(roomNameInput.text))
+    //     {
+    //         RoomOptions options = new RoomOptions();
+    //         options.MaxPlayers  = 20;
+    //
+    //         PhotonNetwork.CreateRoom(roomNameInput.text, options); // 방생성 및 설정된 옵션 전달
+    //
+    //         CloseMenus();
+    //         loadingText.text = "Creating Room...";
+    //         loadingScreen.SetActive(true);
+    //     }
+    // }
 
     
     // 버튼 함수
@@ -161,34 +159,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
     
     public void SelectRoom()
     {
-        //bool foundMatchingRoom = false; // 룸 존재 여부 초기화
-        
-        // 32766
-        
-        // 룸이 존재하는지 체크
-        // foreach (RoomInfo room in allRoomListInfo)
-        // {
-        //     Debug.Log(room.Name);
-        //     // 룸 존재 O -> 방에 들어가기
-        //     if (room.Name == selectedRoomName.text)
-        //     {
-        //         Debug.Log("방 O");
-        //         foundMatchingRoom = true;
-        //         PhotonNetwork.JoinRoom(selectedRoomName.text); // 방 바로 입장
-        //         break;
-        //     }
-        // }
-        //
-        // // 룸 존재 X -> 방 직접 만들고 입장 후, 게임 시작
-        // if (!foundMatchingRoom)
-        // {
-        //     Debug.Log("방 X");
-        //     RoomOptions options = new RoomOptions();
-        //     options.MaxPlayers = 8;
-        //     
-        //     PhotonNetwork.CreateRoom(selectedRoomName.text, options); // 방생성 및 설정된 옵션 전달
-        // }
-        
         RoomOptions options = new RoomOptions();
         options.MaxPlayers  = 20;
             
@@ -200,10 +170,19 @@ public class PunSystem : MonoBehaviourPunCallbacks
         loadingScreen.SetActive(true);
     }
     
-    // 방에 입장 완료시 호출(CreateRoom하고 난 후 or 만들어져 있는 방을 룸버튼 클릭하여, 들어가면)
+    // // 방에 입장 완료시 호출(CreateRoom하고 난 후 or 만들어져 있는 방을 룸버튼 클릭하여, 들어가면)
     public override void OnJoinedRoom()
     {
-        StartGame(); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
+        // 1인 교육용 게임 입장
+        if(PhotonNetwork.CurrentRoom.Name == "VR Game")
+            PhotonNetwork.LoadLevel("VR Game"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
+        // 화면 공유 방 입장
+        else
+        {
+            // 동영상이 있는지 확인하기!!!!!
+            // 없으면 다운
+            // 있으면 방 씬 로드레벨
+        }
         
         // 기존 멀티용
         // ---------------------------------------------------------------------
@@ -224,26 +203,26 @@ public class PunSystem : MonoBehaviourPunCallbacks
     }
 
     // 방 입장 후 플레이어 리스트 출력 + 플레이어가 방에서 나갈시
-    private void ListAllPlayers()
-    {
-        // 정보 비우기
-        foreach(TMP_Text player in allPlayerNames)
-        {
-            Destroy(player.gameObject);
-        }
-        allPlayerNames.Clear();
-
-        // 업데이트
-        Player[] players = PhotonNetwork.PlayerList; // room안의 플레이어 정보를 받아온다.
-        for(int i = 0; i <players.Length; i++)
-        {
-            TMP_Text newPlayerLabel = Instantiate(playerNameLabel, playerNameLabel.transform.parent);
-            newPlayerLabel.text = players[i].NickName;
-            newPlayerLabel.gameObject.SetActive(true);
-
-            allPlayerNames.Add(newPlayerLabel);
-        }
-    }
+    // private void ListAllPlayers()
+    // {
+    //     // 정보 비우기
+    //     foreach(TMP_Text player in allPlayerNames)
+    //     {
+    //         Destroy(player.gameObject);
+    //     }
+    //     allPlayerNames.Clear();
+    //
+    //     // 업데이트
+    //     Player[] players = PhotonNetwork.PlayerList; // room안의 플레이어 정보를 받아온다.
+    //     for(int i = 0; i <players.Length; i++)
+    //     {
+    //         TMP_Text newPlayerLabel = Instantiate(playerNameLabel, playerNameLabel.transform.parent);
+    //         newPlayerLabel.text = players[i].NickName;
+    //         newPlayerLabel.gameObject.SetActive(true);
+    //
+    //         allPlayerNames.Add(newPlayerLabel);
+    //     }
+    // }
 
     // 다른 플레이어가 방에서 입장시 호출(새로 들어온 플레이어만, 만들어 주면 됨)
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -256,10 +235,10 @@ public class PunSystem : MonoBehaviourPunCallbacks
     }
 
     // 다른 플레이어가 방에서 나갈시 호출(나간 플레이어를 지워주고, 새로 구성해야 함)
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        ListAllPlayers();
-    }
+    // public override void OnPlayerLeftRoom(Player otherPlayer)
+    // {
+    //     ListAllPlayers();
+    // }
 
     // 방생성이 실패하면 호출(실패 코드와 메세지설명을 받을 수 있음)
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -342,15 +321,15 @@ public class PunSystem : MonoBehaviourPunCallbacks
         }
     }
 
-    // 버튼 함수
-    public void JoinRoom(RoomInfo inputInfo)
-    {
-        PhotonNetwork.JoinRoom(inputInfo.Name);
-
-        CloseMenus();
-        loadingText.text = "Joining Room";
-        loadingScreen.SetActive(true);
-    }
+    // // 버튼 함수
+    // public void JoinRoom(RoomInfo inputInfo)
+    // {
+    //     PhotonNetwork.JoinRoom(inputInfo.Name);
+    //
+    //     CloseMenus();
+    //     loadingText.text = "Joining Room";
+    //     loadingScreen.SetActive(true);
+    // }
     
     // 버튼 함수
     public void SetNickname()
@@ -369,23 +348,23 @@ public class PunSystem : MonoBehaviourPunCallbacks
     }
 
     // 버튼 함수
-    public void StartGame()
-    {
-        PhotonNetwork.LoadLevel(allMaps[Random.Range(0, allMaps.Length)]);
-    }
+    // public void StartGame()
+    // {
+    //     PhotonNetwork.LoadLevel(allMaps[Random.Range(0, allMaps.Length)]);
+    // }
 
     // 룸의 마스터가 변경될 시 호출(새 마스터의 정보도 가져옴)
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            startButton.SetActive(true);
-        }
-        else
-        {
-            startButton.SetActive(false);
-        }
-    }
+    // public override void OnMasterClientSwitched(Player newMasterClient)
+    // {
+    //     if (PhotonNetwork.IsMasterClient)
+    //     {
+    //         startButton.SetActive(true);
+    //     }
+    //     else
+    //     {
+    //         startButton.SetActive(false);
+    //     }
+    // }
     
     // public void QuickJoin()
     // {
@@ -402,8 +381,4 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
-
-
-
-    // 메인 <- 클라 머지 확인용 주석
 }
