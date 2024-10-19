@@ -972,11 +972,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030339044}
   m_Enabled: 1
-<<<<<<< Updated upstream
   m_VideoClip: {fileID: 0}
-=======
-  m_VideoClip: {fileID: 32900000, guid: 762c205cc94a16f46a56229f91e738d8, type: 3}
->>>>>>> Stashed changes
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -992,7 +988,7 @@ VideoPlayer:
   m_AudioOutputMode: 2
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
-  m_Url: C:\Users\ASUS\Desktop\Unity\Project\VR_Client(Git)\Assets\Resources\Video
+  m_Url: 
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0

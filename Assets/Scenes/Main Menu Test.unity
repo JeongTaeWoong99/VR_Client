@@ -614,13 +614,7 @@ MonoBehaviour:
   errorScreen: {fileID: 574728183}
   errorText: {fileID: 1230996405}
   roomBrowserScreen: {fileID: 1867199151}
-<<<<<<< Updated upstream
-  theRoomButton: {fileID: 1265656809}
-=======
-  sharedRoomPrefabs: {fileID: 4548354232652358116, guid: 98ed8eadbc2166849a702083886d2a22,
-    type: 3}
-  sharedRoomGroup: {fileID: 260972079}
->>>>>>> Stashed changes
+  theRoomButton: {fileID: 0}
   nameInputScreen: {fileID: 600291484}
   nameInput: {fileID: 380965399}
   startButton: {fileID: 1262024651}
@@ -714,7 +708,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
-<<<<<<< Updated upstream
 --- !u!1 &236342427
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,8 +742,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 70, y: 0}
+  m_SizeDelta: {x: 125, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &236342429
 MonoBehaviour:
@@ -772,7 +765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: admin@naver.com
+  m_text: ID_NICKNAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8087ba8c95a491c41ae1d0a76cdaa6c8, type: 2}
   m_sharedMaterial: {fileID: -684583257142655079, guid: 8087ba8c95a491c41ae1d0a76cdaa6c8,
@@ -800,11 +793,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 18.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 9
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -852,8 +845,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236342427}
   m_CullTransparentMesh: 1
-=======
->>>>>>> Stashed changes
 --- !u!1 &256277769
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,12 +968,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< Updated upstream
   m_Children:
   - {fileID: 1265656806}
-=======
-  m_Children: []
->>>>>>> Stashed changes
   m_Father: {fileID: 789657341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -3177,7 +3164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
 --- !u!1001 &931328423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3194,12 +3180,12 @@ PrefabInstance:
     - target: {fileID: 5341244945398905267, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SharedRoomJoin
+      value: OpenRoom
       objectReference: {fileID: 0}
     - target: {fileID: 5341244945398905267, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RoomButton, Assembly-CSharp
+      value: SharedRoomSetting, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5341244945398905267, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
@@ -3289,7 +3275,7 @@ PrefabInstance:
     - target: {fileID: 5341244945398905277, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 200
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 5341244945398905277, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
@@ -3374,8 +3360,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 931328423}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> Stashed changes
 --- !u!1 &932933739
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,7 +4873,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 937595313}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!1 &1265656805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4983,8 +4966,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoNameText: {fileID: 1299983370}
   makeID_Text: {fileID: 236342429}
-=======
->>>>>>> Stashed changes
 --- !u!1 &1267854056
 GameObject:
   m_ObjectHideFlags: 0
@@ -5208,7 +5189,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
-<<<<<<< Updated upstream
 --- !u!1 &1299983368
 GameObject:
   m_ObjectHideFlags: 0
@@ -5346,8 +5326,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299983368}
   m_CullTransparentMesh: 1
-=======
->>>>>>> Stashed changes
 --- !u!1 &1351598851
 GameObject:
   m_ObjectHideFlags: 0

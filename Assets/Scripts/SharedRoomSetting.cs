@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using Photon.Realtime;
-using UnityEngine.Serialization;
 
 public class SharedRoomSetting : MonoBehaviour
 {
@@ -25,6 +24,6 @@ public class SharedRoomSetting : MonoBehaviour
     // 룸 버튼이 눌리는 순간, JoinRoom()함수에, info를 넣어서 실행
     public void OpenRoom()
     {
-        PunSystem.instance.JoinRoom(info);
+        //PunSystem.instance.JoinRoom(info);
     }
 }
