@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PunSystem : MonoBehaviourPunCallbacks
 {
@@ -26,10 +29,12 @@ public class PunSystem : MonoBehaviourPunCallbacks
 
     public GameObject errorScreen;
     public TMP_Text   errorText;
-
-    public  GameObject       roomBrowserScreen;
-    public  RoomButton       theRoomButton; // RoomButton 스크립트 타입의 변수
-    private List<RoomButton> allRoomButtons = new List<RoomButton>();
+    
+    [Header("공유룸")]
+    public  GameObject              roomBrowserScreen;
+    public  GameObject              sharedRoomPrefabs; // RoomButton 스크립트 타입의 변수
+    public  GameObject              sharedRoomGroup;   // 생성위치
+    private List<SharedRoomSetting> allRoomButtons = new List<SharedRoomSetting>();
 
     public GameObject     nameInputScreen;
     public TMP_InputField nameInput;
@@ -63,9 +68,12 @@ public class PunSystem : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings(); // PhotonServerSettings 파일의 설정들로 네트워킹을 세팅한다.
         }                                         // 네트워크가 정상적으로 접속되면, OnConnectedToMaster() 함수가 호출된다;
+    }
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+    private void FixedUpdate()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void CloseMenus()
@@ -175,13 +183,11 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         // 1인 교육용 게임 입장
         if(PhotonNetwork.CurrentRoom.Name == "VR Game")
-            PhotonNetwork.LoadLevel("VR Game"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
+            PhotonNetwork.LoadLevel("VR Game");         // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
         // 화면 공유 방 입장
         else
         {
-            // 동영상이 있는지 확인하기!!!!!
-            // 없으면 다운
-            // 있으면 방 씬 로드레벨
+            PhotonNetwork.LoadLevel("360VideoScene");
         }
         
         // 기존 멀티용
@@ -225,14 +231,14 @@ public class PunSystem : MonoBehaviourPunCallbacks
     // }
 
     // 다른 플레이어가 방에서 입장시 호출(새로 들어온 플레이어만, 만들어 주면 됨)
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        TMP_Text newPlayerLabel = Instantiate(playerNameLabel, playerNameLabel.transform.parent);
-        newPlayerLabel.text = newPlayer.NickName;
-        newPlayerLabel.gameObject.SetActive(true);
-
-        allPlayerNames.Add(newPlayerLabel);
-    }
+    // public override void OnPlayerEnteredRoom(Player newPlayer)
+    // {
+    //     TMP_Text newPlayerLabel = Instantiate(playerNameLabel, playerNameLabel.transform.parent);
+    //     newPlayerLabel.text = newPlayer.NickName;
+    //     newPlayerLabel.gameObject.SetActive(true);
+    //
+    //     allPlayerNames.Add(newPlayerLabel);
+    // }
 
     // 다른 플레이어가 방에서 나갈시 호출(나간 플레이어를 지워주고, 새로 구성해야 함)
     // public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -300,7 +306,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
     // 로비 내에 룸이 생성되거나 사라질때 자동 호출되는 콜백
     public override void OnRoomListUpdate(List<RoomInfo> roomList) // 자동업데이트
     {   
-        foreach(RoomButton rb in allRoomButtons)  // 기존 정보 모두 삭제
+        foreach(SharedRoomSetting rb in allRoomButtons)  // 기존 정보 모두 삭제
             Destroy(rb.gameObject);
         allRoomButtons.Clear();
         
@@ -308,11 +314,12 @@ public class PunSystem : MonoBehaviourPunCallbacks
         {
             if(roomList[i].PlayerCount != roomList[i].MaxPlayers && !roomList[i].RemovedFromList && roomList[i].IsVisible)
             {
-                RoomButton newButton = Instantiate(theRoomButton, theRoomButton.transform.parent);
-                newButton.SetButtonDetails(roomList[i]);
-                newButton.gameObject.SetActive(true);
-        
-                allRoomButtons.Add(newButton);
+                GameObject        newClone   = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
+                SharedRoomSetting newSetting = newClone.GetComponent<SharedRoomSetting>();
+                
+                newSetting.SettingRoomPanel(roomList[i]);
+                newSetting.gameObject.SetActive(true);
+                allRoomButtons.Add(newSetting);
             }
         }
     }

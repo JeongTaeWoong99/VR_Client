@@ -62,7 +62,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
             // 마스터 클라이언트에게 시간정보를 받고, 타이머가 켜지도록
             if(!PhotonNetwork.IsMasterClient)
             {
-                UIController.instance.timerText.gameObject.SetActive(false);
+                UI_Manager.instance.timerText.gameObject.SetActive(false);
             }
         }
     }
@@ -72,9 +72,9 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         // Tab
         if(Input.GetKeyDown(KeyCode.Tab) && state != GameState.Ending)
         {
-            if(UIController.instance.leaderboard.activeInHierarchy)
+            if(UI_Manager.instance.leaderboard.activeInHierarchy)
             {
-                UIController.instance.leaderboard.SetActive(false);
+                UI_Manager.instance.leaderboard.SetActive(false);
             } else
             {
                 ShowLeaderboard();
@@ -291,7 +291,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
 
                 // 리더보드가 켜져있는 상태면, 킬뎃이 바뀐 통신을 했을 때
-                if(UIController.instance.leaderboard.activeInHierarchy)
+                if(UI_Manager.instance.leaderboard.activeInHierarchy)
                 {
                     ShowLeaderboard();
                 }
@@ -308,19 +308,19 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (allPlayers.Count > index) // 안전장치 (정리가 되지 않고, 호출시 생기는 오류)
         {
 
-            UIController.instance.killsText.text = "Kills: " + allPlayers[index].kills;
-            UIController.instance.deathsText.text = "Deaths: " + allPlayers[index].deaths;
+            UI_Manager.instance.killsText.text = "Kills: " + allPlayers[index].kills;
+            UI_Manager.instance.deathsText.text = "Deaths: " + allPlayers[index].deaths;
         }
         else
         {
-            UIController.instance.killsText.text = "Kills: 0";
-            UIController.instance.deathsText.text = "Deaths: 0";
+            UI_Manager.instance.killsText.text = "Kills: 0";
+            UI_Manager.instance.deathsText.text = "Deaths: 0";
         }
     }
 
     void ShowLeaderboard()
     {
-        UIController.instance.leaderboard.SetActive(true);
+        UI_Manager.instance.leaderboard.SetActive(true);
 
         foreach(LeaderboardPlayer lp in lboardPlayers)
         {
@@ -328,13 +328,13 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         lboardPlayers.Clear();
 
-        UIController.instance.leaderboardPlayerDisplay.gameObject.SetActive(false);
+        UI_Manager.instance.leaderboardPlayerDisplay.gameObject.SetActive(false);
 
         List<PlayerInfo> sorted = SortPlayers(allPlayers);
 
         foreach(PlayerInfo player in sorted)
         {
-            LeaderboardPlayer newPlayerDisplay = Instantiate(UIController.instance.leaderboardPlayerDisplay, UIController.instance.leaderboardPlayerDisplay.transform.parent);
+            LeaderboardPlayer newPlayerDisplay = Instantiate(UI_Manager.instance.leaderboardPlayerDisplay, UI_Manager.instance.leaderboardPlayerDisplay.transform.parent);
 
             newPlayerDisplay.SetDetails(player.name, player.kills, player.deaths);
 
@@ -422,7 +422,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PhotonNetwork.DestroyAll();
         }
 
-        UIController.instance.endScreen.SetActive(true);
+        UI_Manager.instance.endScreen.SetActive(true);
         ShowLeaderboard();
 
         Cursor.lockState = CursorLockMode.None;
@@ -489,8 +489,8 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         state = GameState.Playing;                // 상태 변경
     
-        UIController.instance.endScreen.SetActive(false);
-        UIController.instance.leaderboard.SetActive(false);
+        UI_Manager.instance.endScreen.SetActive(false);
+        UI_Manager.instance.leaderboard.SetActive(false);
     
         foreach (PlayerInfo player in allPlayers) // 킬뎃 초기화
         {
@@ -516,7 +516,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         var timeToDisplay = System.TimeSpan.FromSeconds(currentMatchTime);
     
-        UIController.instance.timerText.text = timeToDisplay.Minutes.ToString("00") + ":" + timeToDisplay.Seconds.ToString("00");
+        UI_Manager.instance.timerText.text = timeToDisplay.Minutes.ToString("00") + ":" + timeToDisplay.Seconds.ToString("00");
     }
 
     public void TimerSend()
@@ -538,7 +538,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     
         UpdateTimerDisplay();
     
-        UIController.instance.timerText.gameObject.SetActive(true);
+        UI_Manager.instance.timerText.gameObject.SetActive(true);
     }
 }
 

@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 332335165}
+  _gameViewEncoder: {fileID: 0}
 --- !u!114 &332335165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2673,7 +2674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dcd51386d92e7143a3700e4b75e235b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameViewEncoder: {fileID: 963194229}
 --- !u!1 &1052313065
 GameObject:
   m_ObjectHideFlags: 0

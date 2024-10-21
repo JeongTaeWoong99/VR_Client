@@ -38,7 +38,7 @@ public class PlayerSpawner : MonoBehaviour
     {
         // 죽음 텍스트 활성화(damager의 이름 추가)
         // 킬뎃업데이트(데스가 올라갈 사람 즉 자기자신,death,증감양)    -> Die함수가 실행 시 자신이 죽은 것 이기 때문에!!
-        UIController.instance.deathText.text = "You were killed by " + damager;
+        UI_Manager.instance.deathText.text = "You were killed by " + damager;
         MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 1, 1);
     
         if(player != null)
@@ -53,11 +53,11 @@ public class PlayerSpawner : MonoBehaviour
     
         PhotonNetwork.Destroy(player);
         player = null;
-        UIController.instance.deathScreen.SetActive(true);
+        UI_Manager.instance.deathScreen.SetActive(true);
     
         yield return new WaitForSeconds(respawnTime);
     
-        UIController.instance.deathScreen.SetActive(false);
+        UI_Manager.instance.deathScreen.SetActive(false);
     
         if (MatchManager.instance.state == MatchManager.GameState.Playing && player == null)
         {

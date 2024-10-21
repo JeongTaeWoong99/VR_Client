@@ -6,10 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu Test.unity
+    guid: 1624dccd91b87ea45b60608b8fc3e00d
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: add7087a7cebfd94e992b4a502c859ec
   - enabled: 1
     path: Assets/Scenes/VR Game.unity
     guid: 86bec4866421e494f81f782f2db5a94a
+  - enabled: 1
+    path: Assets/Scenes/360VideoScene.unity
+    guid: a445116f65751734d80c334ee1d0a5e6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
