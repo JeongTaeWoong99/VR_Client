@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class UI_Manager : MonoBehaviour
+public class UI_Manager : MonoBehaviourPunCallbacks
 {
     public static UI_Manager instance;
     

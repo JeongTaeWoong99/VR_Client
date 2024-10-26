@@ -4,6 +4,7 @@ using Photon.Realtime;
 using ExitGames.Client.Photon;
 
 // 미러링 + 화면 공유 공통 매니저
+// 여기다가 ReturnToMainMenu같은 미러링방 + 화면공유방 공통으로 씌일 녀석들을 넣으면 될 듯
 public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     public static IngameManager instance;

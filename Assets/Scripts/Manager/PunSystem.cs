@@ -8,6 +8,7 @@ using Photon.Realtime;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+// 로비
 public class PunSystem : MonoBehaviourPunCallbacks
 {
     public static PunSystem instance;
@@ -60,10 +61,10 @@ public class PunSystem : MonoBehaviourPunCallbacks
     void Start()
     {
         CloseMenus();
-
+        
         loadingScreen.SetActive(true);
         loadingText.text = "Connecting To Network...";
-
+        
         if (!PhotonNetwork.IsConnected) // 게임화면에서, 다시 메인메뉴로 돌아와서, 설정세팅을 하는 경우 방지
         {
             PhotonNetwork.ConnectUsingSettings(); // PhotonServerSettings 파일의 설정들로 네트워킹을 세팅한다.
@@ -305,19 +306,20 @@ public class PunSystem : MonoBehaviourPunCallbacks
     // 룸 리스트 초기화 - 현재 생성된 룸들의 정보가 담긴 리스트가 매개변수로 온다.
     // 로비 내에 룸이 생성되거나 사라질때 자동 호출되는 콜백
     public override void OnRoomListUpdate(List<RoomInfo> roomList) // 자동업데이트
-    {   
+    {
         foreach(SharedRoomSetting rb in allRoomButtons)  // 기존 정보 모두 삭제
             Destroy(rb.gameObject);
         allRoomButtons.Clear();
         
-        for (int i = 0; i < roomList.Count; i++)
-        {
-            if(roomList[i].PlayerCount != roomList[i].MaxPlayers && !roomList[i].RemovedFromList && roomList[i].IsVisible)
+        foreach (var roomLists in roomList)
+        {   
+            // 미러링은 방은 검색 안되도록 하기...
+            if(roomLists.Name != "VR Game" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
             {
                 GameObject        newClone   = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
                 SharedRoomSetting newSetting = newClone.GetComponent<SharedRoomSetting>();
                 
-                newSetting.SettingRoomPanel(roomList[i]);
+                newSetting.SettingRoomPanel(roomLists);
                 newSetting.gameObject.SetActive(true);
                 allRoomButtons.Add(newSetting);
             }

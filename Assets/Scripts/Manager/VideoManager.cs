@@ -5,7 +5,7 @@ using Photon.Pun;
 using SimpleFileBrowser;
 using UnityEngine;
 
-// 로비 전용
+// 로비 // 비디오 체크 및 다운로드
 public class VideoManager : MonoBehaviour
 {
     public static VideoManager instance;
@@ -80,5 +80,4 @@ public class VideoManager : MonoBehaviour
             Debug.Log("다운 성공 : " + localFilePath);
         }
     }
-
 }
