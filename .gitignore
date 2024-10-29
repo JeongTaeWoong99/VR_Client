@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # 젯브레인 커밋 제외. 젯브레인 사용자와 비주얼 사용자간 Pull 에러 방지.
 .idea/
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_3_0.bundle
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_3_0.so
