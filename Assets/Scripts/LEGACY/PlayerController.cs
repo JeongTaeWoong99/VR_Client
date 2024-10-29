@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 {
                     overHeated = false;
             
-                    UIController.instance.overheatedMessage.gameObject.SetActive(false);
+                    UI_Manager.instance.overheatedMessage.gameObject.SetActive(false);
                 }
             }
             
@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             }
             else if (Cursor.lockState == CursorLockMode.None)
             {
-                if (Input.GetMouseButtonDown(0) && !UIController.instance.optionsScreen.activeInHierarchy)
+                if (Input.GetMouseButtonDown(0) && !UI_Manager.instance.optionsScreen.activeInHierarchy)
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                 }
@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     
             overHeated = true;
     
-            UIController.instance.overheatedMessage.gameObject.SetActive(true);
+            UI_Manager.instance.overheatedMessage.gameObject.SetActive(true);
         }
     
         allGuns[selectedGun].muzzleFlash.SetActive(true);

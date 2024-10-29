@@ -40,7 +40,11 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - PauseVideo
+  - StartVideo
   - SetGun
+  - ReturnToMainMenu
+  - OnReturnToMainMenu
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
