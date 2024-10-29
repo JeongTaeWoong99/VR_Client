@@ -71,12 +71,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
         }                                         // 네트워크가 정상적으로 접속되면, OnConnectedToMaster() 함수가 호출된다;
     }
 
-    private void FixedUpdate()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     void CloseMenus()
     {
         loadingScreen.SetActive(false);
