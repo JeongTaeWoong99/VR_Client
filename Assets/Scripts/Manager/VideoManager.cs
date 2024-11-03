@@ -4,6 +4,7 @@ using Firebase.Storage;
 using Photon.Pun;
 using SimpleFileBrowser;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 로비 // 비디오 체크 및 다운로드
 public class VideoManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class VideoManager : MonoBehaviour
         FileBrowser.AddQuickLink( "Users", "C:\\Users", null);          // 기존 위치
     }
 
+    // 입장 버튼(비디오 체크 및 입장)
     public IEnumerator CheckAndJoin(string videoName,string roomName)
     {
         yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, true, null, null, "Select Files", "Load");
@@ -48,8 +50,11 @@ public class VideoManager : MonoBehaviour
                 if (fileName == videoName + ".mp4")
                 {
                     Debug.Log("선택한 동영상이 동일합니다.");
-                    PhotonNetwork.JoinRoom(roomName);
-                    PlayerPrefs.SetString("videoPath",filePath);    // 파일 경로 정적 저장
+                    
+                    PlayerPrefs.SetString("roomName",roomName);  // 공유름 씬을 로드하고, 포톤룸을 들어감.
+                    PlayerPrefs.SetString("videoPath",filePath); // 파일 경로 정적 저장.
+                    
+                    SceneManager.LoadScene("360VideoScene");     // 씬 로드
                 }
                 else
                 {
@@ -60,6 +65,7 @@ public class VideoManager : MonoBehaviour
         }
     }
 
+    // 비디오 다운로드 버튼
     public IEnumerator VideoDownload(string videoName)
     {
         string desktopPath   = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);  // 데스크탑 바탕화면

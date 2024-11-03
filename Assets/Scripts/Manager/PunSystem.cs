@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 // 로비
@@ -90,7 +90,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
 
         // 방을 처음 만든 사람이 마스터, 이후 마스터가 방을 나가면, 남아있는 렌덤한 사람에게 마스터 권한이 간다.
         // 마스터가 PhotonNetwork.LoadLevel()을 호출하면, 모든 플레이어가 동일한 레벨을 자동으로 로드(true면 로드 , false면 로드 x) -> StartGame버튼에서 로드레벨 사용
-        PhotonNetwork.AutomaticallySyncScene = true;
+        //PhotonNetwork.AutomaticallySyncScene = true;
 
         loadingText.text = "Joining Lobby...";
     }
@@ -177,13 +177,17 @@ public class PunSystem : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // 1인 교육용 게임 입장
-        if(PhotonNetwork.CurrentRoom.Name == "VR Game")
-            PhotonNetwork.LoadLevel("VR Game");         // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
-        // 화면 공유 방 입장
-        else
+        if (PhotonNetwork.CurrentRoom.Name == "VR Game")
         {
-            PhotonNetwork.LoadLevel("360VideoScene");
+            SceneManager.LoadScene("VR Game"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
         }
+        // 화면 공유 방 입장
+        // else
+        // {
+        //     PhotonNetwork.LoadLevel("360VideoScene");
+        // }
+        
+        
         
         // 기존 멀티용
         // ---------------------------------------------------------------------
@@ -202,6 +206,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
         //     startButton.SetActive(false);
         // }
     }
+
 
     // 방 입장 후 플레이어 리스트 출력 + 플레이어가 방에서 나갈시
     // private void ListAllPlayers()
@@ -258,7 +263,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
             errorScreen.SetActive(true);
         }
     }
-
+    
     // 버튼 함수
     public void CloseErrorScreen()
     {

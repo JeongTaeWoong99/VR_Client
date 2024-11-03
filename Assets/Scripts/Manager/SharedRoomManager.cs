@@ -9,6 +9,8 @@ using UnityEngine.Video;
 // 화면 공유 전용
 public class SharedRoomManager : MonoBehaviourPunCallbacks
 {
+    public static SharedRoomManager instance;
+
     public Button mainMenuButton; // 메인메뉴로 돌아가기 버튼
 
     public GameObject[] objectsToHide;
@@ -18,13 +20,15 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     public float        fadeDuration = 1.0f;
 
     private Material _skyMaterial;
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         _skyMaterial = RenderSettings.skybox;
-        
-        // 세팅 쭉~~ 넣어주기(시간 / 재생상태 등등)
-        videoPlayer.url = PlayerPrefs.GetString("videoPath"); // 동영상 위치를 정적으로 받아서, 바로 넣어주기
     }
 
     [PunRPC]
@@ -53,6 +57,21 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
         StartCoroutine(ReturnToMainMenu());
     }
     
+    [PunRPC]    // 슬라이더 이동 동기화
+    public void VideoTimeChange(double newTime)
+    {
+        videoPlayer.time = newTime;
+    }
+    
+    [PunRPC]  // 입장시, 상태 동기화
+    public void VideoSetting(bool isPlaying, double currentTime)
+    {
+        // 세팅 넣어주기(경로 / 시간 / 재생상태 등등)
+        videoPlayer.url = PlayerPrefs.GetString("videoPath"); // 동영상 위치를 정적으로 받아서, 바로 넣어주기
+        videoPlayer.time = currentTime;                          // 재생 시간 동기화
+        if (isPlaying) StartVideo();                             // 재생 상태 동기화
+    }
+
     private IEnumerator ReturnToMainMenu()
     {
         if (PhotonNetwork.InRoom)
