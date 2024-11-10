@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Breakable : MonoBehaviour
 {
     public List<GameObject> breakablePieces;
-    public float timeToBreak = 2;
+    public float timeToBreak = 1;
     private float timer = 0;
     public UnityEvent OnBreak;
 
