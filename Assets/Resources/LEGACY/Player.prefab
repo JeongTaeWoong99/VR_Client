@@ -991,7 +991,7 @@ MonoBehaviour:
   groundCheckPoint: {fileID: 7338187918684671633}
   groundLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   bulletImpact: {fileID: 5134447405508016154, guid: bb82bd348312b0e47b59bd7dd0fe8dcc,
     type: 3}
   muzzleDisplayTime: 0.016666668
