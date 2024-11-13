@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuButton: {fileID: 1476408768}
   objectsToHide:
-  - {fileID: 0}
+  - {fileID: 6261219540619771760}
   fadeCanvas: {fileID: 633768806}
   videoMaterial: {fileID: 2100000, guid: 00e17ff23fa43404e89df5b2f863a4b5, type: 2}
   videoPlayer: {fileID: 1030339046}
