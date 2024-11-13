@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 152384791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.5379, y: -53.34573, z: -88.81624}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2330,6 +2330,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6282590693513546697, guid: 7a4cbe49e867c194490198ddc4ef6eeb,
+        type: 3}
+      propertyPath: ObservedComponentsFoldoutOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2341,6 +2346,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1463896922}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1463896924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 287471089647322835, guid: 7a4cbe49e867c194490198ddc4ef6eeb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1463896922}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2f3acb5680394429ab771c9815737f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486677401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,6 +2944,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FMNetwork_Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: SyncFPS
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: NetworkType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1463896924}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Behaviour, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6720732171757235766, guid: 707c52b172ae0644b82688fedef69ef1,
         type: 3}
@@ -5625,7 +5687,7 @@ MonoBehaviour:
   AsyncMode: 1
   GZipMode: 0
   PanoramaMode: 0
-  Quality: 30
+  Quality: 80
   StreamFPS: 30
   ignoreSimilarTexture: 1
   similarByteSizeThreshold: 8

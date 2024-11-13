@@ -3086,10 +3086,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 50
-    m_Bottom: 0
+    m_Top: 25
+    m_Bottom: 25
   m_ChildAlignment: 1
-  m_Spacing: 100
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -23416,7 +23416,7 @@ Transform:
   m_GameObject: {fileID: 8644238808640670058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.045, z: 0}
+  m_LocalPosition: {x: 0, y: 0.045000076, z: -0.00000047683716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
