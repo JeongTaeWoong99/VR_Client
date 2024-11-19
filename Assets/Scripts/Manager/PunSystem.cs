@@ -172,7 +172,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
         foreach (var roomLists in roomList)
         {   
             // 미러링은 방은 검색 안되도록 하기...
-            if(roomLists.Name != "VR Game" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
+            if(roomLists.Name != "Space" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
             {
                 GameObject        newClone   = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
                 SharedRoomButton newButton = newClone.GetComponent<SharedRoomButton>();
