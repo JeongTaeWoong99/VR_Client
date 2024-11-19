@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Meteor
   - Energy
+  - Vortex
   layers:
   - Default
   - TransparentFX
