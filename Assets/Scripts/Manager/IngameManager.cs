@@ -14,7 +14,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     
     [Header("미러링/화면공유 공통")]
     public FadeCanvas fadeCanvas;
-    public float      fadeDuration = 2.0f;
+    public float      sceneTransitionTime = 2.0f;
     
     public Button     mainMenuButton;           // 메인메뉴로 돌아가기 버튼
     
@@ -79,12 +79,12 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     
     [PunRPC] // 버튼으로 사용 + CMS RPC로도 사용
-    public void OnReturnToMainMenu(float duration=2.0f)
+    public void OnReturnToMainMenu()
     {
-        StartCoroutine(ReturnToMainMenu(duration));
+        StartCoroutine(ReturnToMainMenu(sceneTransitionTime));
     }
     
-    private IEnumerator ReturnToMainMenu(float duration)
+    public IEnumerator ReturnToMainMenu(float duration)
     {
         if (PhotonNetwork.InRoom)
         {

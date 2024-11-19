@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585e009609b6a2b429c97bc8c2d201fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quickFadeDuration: 1
   isMirroringScene: 0
 --- !u!225 &633768807
 CanvasGroup:
@@ -1046,6 +1047,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5341244945398905267, guid: c3dafe81f46554443b15d3d79217cbd8,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341244945398905267, guid: c3dafe81f46554443b15d3d79217cbd8,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2056376858}
@@ -1489,7 +1495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 633768806}
-  fadeDuration: 1
+  sceneTransitionTime: 2
   mainMenuButton: {fileID: 1476408768}
   _gameViewEncoder: {fileID: 0}
 --- !u!1 &58445280022219383
