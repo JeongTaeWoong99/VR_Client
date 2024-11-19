@@ -8,6 +8,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // 로비
 public class PunSystem : MonoBehaviourPunCallbacks
@@ -42,8 +43,8 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         instance = this;
         
-        PhotonNetwork.SendRate          = 30; // 초당 서버로 보내는 패킷 횟수 (기본값 20)
-        PhotonNetwork.SerializationRate = 30; // 초당 동기화되는 데이터 횟수 (기본값 10)
+        PhotonNetwork.SendRate          = 10; // 초당 서버로 보내는 패킷 횟수 (기본값 20)
+        PhotonNetwork.SerializationRate = 10; // 초당 동기화되는 데이터 횟수 (기본값 10)
     }
     
     void Start()
@@ -71,10 +72,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(); // 로비입장
-
-        // 방을 처음 만든 사람이 마스터, 이후 마스터가 방을 나가면, 남아있는 렌덤한 사람에게 마스터 권한이 간다.
-        // 마스터가 PhotonNetwork.LoadLevel()을 호출하면, 모든 플레이어가 동일한 레벨을 자동으로 로드(true면 로드 , false면 로드 x) -> StartGame버튼에서 로드레벨 사용
-        //PhotonNetwork.AutomaticallySyncScene = true;
     }
     //서버접속 실패시 재시도
     public override void OnDisconnected(DisconnectCause cause) 
@@ -88,7 +85,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = Random.Range(0, 1000).ToString();
 
-        // 첫 게임접속 후 로비화면
+        // 첫 게임접속 후, 로비화면
         if (!hasSetNick)
         {
             CloseMenus();
@@ -99,6 +96,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
                 nameInput.text = PlayerPrefs.GetString("playerName");
             }
         }
+        // 닉네임이 설정되어 있는 경우
         else
         {
             CloseMenus();
@@ -107,6 +105,10 @@ public class PunSystem : MonoBehaviourPunCallbacks
         
             PhotonNetwork.NickName = PlayerPrefs.GetString("playerName");
         }
+        
+        // 교육생 구분, 접속 플레이어 구분 헤쉬테이블 추가
+        Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
     }
 
     // 버튼 함수
@@ -121,46 +123,11 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         CloseMenus();
         loadingScreen.SetActive(true);
-    
-        RoomOptions options = new RoomOptions();
-        options.MaxPlayers  = 20;
         
-        PhotonNetwork.CreateRoom(selectedRoomName.text,options); // 방생성 및 설정된 옵션 전달
+        PlayerPrefs.SetString("roomName", selectedRoomName.text);
+        SceneManager.LoadScene(selectedRoomName.text);
     }
-    
-    // // 방에 입장 완료시 호출(CreateRoom하고 난 후 or 만들어져 있는 방을 룸버튼 클릭하여, 들어가면)
-    public override void OnJoinedRoom()
-    {
-        // 1인 교육용 게임 입장
-        if (PhotonNetwork.CurrentRoom.Name == "VR Game")
-        {
-            SceneManager.LoadScene("Space"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
-        }
-        // 화면 공유 방 입장
-        // else
-        // {
-        //     PhotonNetwork.LoadLevel("360VideoScene");
-        // }
-    }
-    
-    // 방생성이 실패하면 호출(실패 코드와 메세지설명을 받을 수 있음)
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        // 이미 교육용 게임 방이 존재하는 경우
-        if (returnCode == 32766)
-        {
-            PhotonNetwork.JoinRoom(selectedRoomName.text); // 방에 입장.
-        }
-        // 그 외, 오류 표시
-        else
-        {
-            Debug.Log(returnCode);
-            feedbackText.gameObject.SetActive(true);
-            feedbackText.text = "오류코드 : " + returnCode;
-            CloseMenus();
-        }
-    }
-    
+
     // 버튼함수
     // 만든 방 삭제 및 삭제가 완료되면, Lobby로 다시 접속(Room -> Lobby)
     public void LeaveRoom()
