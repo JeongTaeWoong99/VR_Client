@@ -79,12 +79,12 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     
     [PunRPC] // 버튼으로 사용 + CMS RPC로도 사용
-    public void OnReturnToMainMenu()
+    public void OnReturnToMainMenu(float duration=2.0f)
     {
-        StartCoroutine(ReturnToMainMenu());
+        StartCoroutine(ReturnToMainMenu(duration));
     }
     
-    private IEnumerator ReturnToMainMenu()
+    private IEnumerator ReturnToMainMenu(float duration)
     {
         if (PhotonNetwork.InRoom)
         {
@@ -93,8 +93,8 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PhotonNetwork.AutomaticallySyncScene = false;
             PhotonNetwork.Disconnect();                     // 서버와 연결 끊기
             
-            fadeCanvas.QuickFadeIn();                       // 페이드인                
-            yield return new WaitForSeconds(fadeDuration);  
+            fadeCanvas.StartFadeIn(duration);                     // 페이드인                
+            yield return new WaitForSeconds(duration);  
             
             SceneManager.LoadScene("Main Menu"); // Main Menu Test에서 Main Menu으로 돌아가면, 오류.(XR 중복)
         }

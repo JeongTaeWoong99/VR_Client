@@ -19,15 +19,8 @@ public class FadeCanvas : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-
-        LevelManager.FadeIn  += StartFadeIn;
-        LevelManager.FadeOut += StartFadeOut;
-    }
-    
-    private void OnDestroy()
-    {
-        LevelManager.FadeIn  -= StartFadeIn;
-        LevelManager.FadeOut -= StartFadeOut;
+        
+        StartFadeOut(quickFadeDuration);
     }
     
     public void StartFadeIn(float fadeDuration)
