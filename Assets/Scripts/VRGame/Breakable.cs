@@ -8,7 +8,6 @@ public class Breakable : MonoBehaviour
     public List<GameObject> breakablePieces;
     public float timeToBreak = 1;
     private float timer = 0;
-    public UnityEvent OnBreak;
 
     void Start()
     {
@@ -29,7 +28,7 @@ public class Breakable : MonoBehaviour
                 item.transform.parent = null;
             }
             
-            OnBreak.Invoke();
+            AudioManager.instance.Play("Breaked");
             
             gameObject.SetActive(false);
         }

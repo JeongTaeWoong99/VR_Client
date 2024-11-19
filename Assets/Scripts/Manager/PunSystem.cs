@@ -134,7 +134,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
         // 1인 교육용 게임 입장
         if (PhotonNetwork.CurrentRoom.Name == "VR Game")
         {
-            SceneManager.LoadScene("VR Game"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
+            SceneManager.LoadScene("Space"); // 게임 바로 시작(방 만들어지고, 바로 시작 + 룸 입장하고 바로 시작)
         }
         // 화면 공유 방 입장
         // else
