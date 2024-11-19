@@ -7995,7 +7995,7 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: VR Game
+    - m_Text: Space
       m_Image: {fileID: 0}
     - m_Text: Null Map
       m_Image: {fileID: 0}
@@ -18548,7 +18548,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: VR Game
+  m_Text: Space
 --- !u!222 &1890629307
 CanvasRenderer:
   m_ObjectHideFlags: 0
