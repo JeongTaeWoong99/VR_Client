@@ -34,6 +34,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FadeOut?.Invoke(fadeDuration);
+    }
+    
     // public void LoadSceneAsync(string sceneName)
     // {
     //     if (!_isLoading)
@@ -62,9 +67,4 @@ public class LevelManager : MonoBehaviour
     //     }
     //     _isLoading = false;
     // }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        FadeOut?.Invoke(fadeDuration);
-    }
 }

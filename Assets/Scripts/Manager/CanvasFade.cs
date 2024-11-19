@@ -1,5 +1,6 @@
 using System.Collections;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
@@ -12,6 +13,7 @@ public class FadeCanvas : MonoBehaviour
 
     private float quickFadeDuration = 0.5f;
 
+    public  bool isMirroringScene;      // 미러링씬이면
     private bool isFirstFadeOut = true; // 맨 처음 들어왔을 때, 세팅 전의 페이드 아웃인가
 
     private void Awake()
@@ -77,7 +79,18 @@ public class FadeCanvas : MonoBehaviour
         }
         
         // 처음 세팅
-        if (isFirstFadeOut)
+        // 미러링방 입장(방이 없어도 입장이 가능하니 -> CreateRoom)
+        if (isFirstFadeOut && isMirroringScene)
+        {
+            isFirstFadeOut = false;
+            
+            RoomOptions options = new RoomOptions();
+            options.MaxPlayers  = 20;
+            PhotonNetwork.CreateRoom(PlayerPrefs.GetString("roomName"),options);
+            Debug.Log("실행");
+        }
+        // 쉐어룸 입장(방이 있어야 입장 가능하니 -> JoinRoom)
+        else if (isFirstFadeOut && !isMirroringScene)
         {
             isFirstFadeOut = false;
             PhotonNetwork.JoinRoom(PlayerPrefs.GetString("roomName")); // 룸 입장
