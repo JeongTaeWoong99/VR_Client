@@ -11,7 +11,7 @@ public class FadeCanvas : MonoBehaviour
     private CanvasGroup canvasGroup = null;
     private float       alpha       = 0.0f;
 
-    private float quickFadeDuration = 0.5f;
+    public float quickFadeDuration = 1f;
 
     public  bool isMirroringScene;      // 미러링씬이면
     private bool isFirstFadeOut = true; // 맨 처음 들어왔을 때, 세팅 전의 페이드 아웃인가

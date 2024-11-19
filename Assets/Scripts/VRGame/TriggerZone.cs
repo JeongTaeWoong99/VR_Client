@@ -26,7 +26,8 @@ public class TriggerZone : MonoBehaviour
             AudioManager.instance.Stop("Engine");
             
             AudioManager.instance.Play("Ending");
-            PadeManager.instance.FadeOut();
+            
+            IngameManager.instance.fadeCanvas.StartFadeIn(4);
         }
     }
 

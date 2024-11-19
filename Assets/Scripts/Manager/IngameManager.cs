@@ -14,7 +14,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     
     [Header("미러링/화면공유 공통")]
     public FadeCanvas fadeCanvas;
-    public float      fadeDuration = 1.0f;
+    public float      fadeDuration = 2.0f;
     
     public Button     mainMenuButton;           // 메인메뉴로 돌아가기 버튼
     
