@@ -3489,51 +3489,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db49253e161c21440b7ccf6d59865098, type: 3}
---- !u!1 &397652869
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 397652871}
-  - component: {fileID: 397652870}
-  m_Layer: 0
-  m_Name: Level Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &397652870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397652869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf30890db4873f3489e523843432c2d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeDuration: 1
---- !u!4 &397652871
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397652869}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &401529739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13253,7 +13208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 2037370375}
-  fadeDuration: 3
+  fadeDuration: 4
   mainMenuButton: {fileID: 822813975}
   _gameViewEncoder: {fileID: 1455440211}
 --- !u!1001 &1670640511
@@ -15866,6 +15821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585e009609b6a2b429c97bc8c2d201fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quickFadeDuration: 1
   isMirroringScene: 1
 --- !u!114 &2037370376
 MonoBehaviour:
@@ -22058,7 +22014,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 550530232}
   - {fileID: 1664200814}
-  - {fileID: 397652871}
   - {fileID: 2037370381}
   - {fileID: 1526324302}
   - {fileID: 1432513136}
