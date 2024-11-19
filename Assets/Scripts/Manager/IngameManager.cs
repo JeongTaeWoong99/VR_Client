@@ -48,7 +48,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         PhotonNetwork.AddCallbackTarget(this);
     }
-
+    
     // 활성화 될 때마다 호출
     public override void OnDisable()
     {

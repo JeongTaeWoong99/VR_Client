@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -68,9 +68,9 @@ public class FadeCanvas : MonoBehaviour
     }
 
     private IEnumerator FadeOut(float duration)
-    {
+    {   
         float elapsedTime = 0.0f;
-
+        
         while (alpha >= 0.0f)
         {
             SetAlpha(1 - (elapsedTime / duration));
