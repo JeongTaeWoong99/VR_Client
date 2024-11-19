@@ -9,7 +9,6 @@ public class TriggerZone : MonoBehaviour
     public float originSize;
     public float targetSize;
     public float fadeDuration;
-    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,7 +26,7 @@ public class TriggerZone : MonoBehaviour
             
             AudioManager.instance.Play("Ending");
             
-            IngameManager.instance.OnReturnToMainMenu(5f);
+            StartCoroutine(IngameManager.instance.ReturnToMainMenu(5f));
         }
     }
 
