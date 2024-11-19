@@ -19,7 +19,7 @@ public class FadeCanvas : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        
+
         LevelManager.FadeIn  += StartFadeIn;
         LevelManager.FadeOut += StartFadeOut;
     }
@@ -68,9 +68,9 @@ public class FadeCanvas : MonoBehaviour
     }
 
     private IEnumerator FadeOut(float duration)
-    {
+    {   
         float elapsedTime = 0.0f;
-
+        
         while (alpha >= 0.0f)
         {
             SetAlpha(1 - (elapsedTime / duration));
