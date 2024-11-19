@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -19,7 +19,7 @@ public class FadeCanvas : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        
+
         LevelManager.FadeIn  += StartFadeIn;
         LevelManager.FadeOut += StartFadeOut;
     }
