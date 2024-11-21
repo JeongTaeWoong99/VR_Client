@@ -135,12 +135,28 @@ public class VideoManager : MonoBehaviour
         PunSystem.instance.feedbackText.gameObject.SetActive(true);
         PunSystem.instance.feedbackText.text = "동영상을 다운받고 있습니다.";
     
-        string desktopPath   = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);  // 데스크탑 바탕화면
-        string localFilePath = System.IO.Path.Combine(desktopPath, videoName + ".mp4");                     // 저장 및 파일이름 세팅
+        // string desktopPath   = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);  // 데스크탑 바탕화면
+        // string localFilePath = System.IO.Path.Combine(desktopPath, videoName + ".mp4");                     // 저장 및 파일이름 세팅
+        
+        // 각각의 바탕화면에 저장하도록 함.
+        string localFilePath;
+        
+        // 에디터 or 윈도우 빌드
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            string desktopPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            localFilePath      = System.IO.Path.Combine(desktopPath, videoName + ".mp4"); // For desktop builds
+        }
+        // 모바일 빌드 or VR빌드
+        else
+        {
+            string mobileOrVRPath = Application.persistentDataPath;
+            localFilePath         = System.IO.Path.Combine(mobileOrVRPath, videoName + ".mp4");
+        }
 
         StorageReference videoRef = stRef.Child(videoName + ".mp4");    // 저장소 참조 위치
 
-        Task downloadTask = videoRef.GetFileAsync(localFilePath);        // 비동기 Task 실행
+        Task downloadTask = videoRef.GetFileAsync(localFilePath);       // 비동기 Task 실행
     
         yield return new WaitUntil(() => downloadTask.IsCompleted);
 
