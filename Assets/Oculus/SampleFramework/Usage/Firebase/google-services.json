@@ -1,16 +1,16 @@
 {
   "project_info": {
-    "project_number": "",
-    "firebase_url": "",
-    "project_id": "",
-    "storage_bucket": ""
+    "project_number": "687470448967",
+    "firebase_url": "https://cms-login-d93aa-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cms-login-d93aa",
+    "storage_bucket": "cms-login-d93aa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "",
+        "mobilesdk_app_id": "1:687470448967:android:a1eab8140bdf582195fc62",
         "android_client_info": {
-          "package_name": ""
+          "package_name": "com.firebase.cmslogin"
         }
       },
       "oauth_client": [
@@ -29,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "AIzaSyD1uYRaQ_jDCcaSQL3hZbVr9hXSaRcNnSk"
         }
       ],
       "services": {

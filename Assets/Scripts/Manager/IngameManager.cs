@@ -96,7 +96,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             fadeCanvas.StartFadeIn(duration);                     // 페이드인                
             yield return new WaitForSeconds(duration);  
             
-            SceneManager.LoadScene("Main Menu"); // Main Menu Test에서 Main Menu으로 돌아가면, 오류.(XR 중복)
+            SceneManager.LoadScene("Main Menu Debug"); // Main Menu Test에서 Main Menu으로 돌아가면, 오류.(XR 중복)
         }
     }
 }

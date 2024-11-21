@@ -7,8 +7,9 @@ using UnityEngine;
 public class FadeCanvas : MonoBehaviour
 {
     public Coroutine CurrentRoutine { private set; get; } = null;
-    
-    private CanvasGroup canvasGroup = null;
+
+    [SerializeField]
+    private Renderer fadeQuadRenderer;
     private float       alpha       = 0.0f;
 
     public float quickFadeDuration = 1f;
@@ -18,14 +19,12 @@ public class FadeCanvas : MonoBehaviour
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        
         StartFadeOut(quickFadeDuration);
     }
     
     public void StartFadeIn(float fadeDuration)
     {
-        canvasGroup.alpha = 1f;
+        fadeQuadRenderer.material.color= new Color(0, 0, 0, 1);
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(FadeIn(fadeDuration));
     }
@@ -93,6 +92,6 @@ public class FadeCanvas : MonoBehaviour
     private void SetAlpha(float value)
     {
         alpha = value;
-        canvasGroup.alpha = alpha;
+        fadeQuadRenderer.material.color= new Color(0, 0, 0, alpha);
     }
 }
