@@ -144,6 +144,7 @@ PlayerSettings:
   tvOSBundleVersion: 1.0
   bundleVersion: 0.001
   preloadedAssets:
+  - {fileID: 0}
   - {fileID: 11400000, guid: d318f47f08fd75545b9454e1cac210e3, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -166,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.firebase.cmslogin
+    Android: com.VRBC.VRGame
     Standalone: com.VRBC.VR-Game
     iPhone: com.FrozenMist.ExhibitionPackT001
   buildNumber:

@@ -9,13 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu Debug.unity
     guid: 27911b943dfb98f4a820379caef55047
   - enabled: 1
+    path: Assets/Scenes/360VideoScene.unity
+    guid: 8814882c6f9e2c94a8bea73da2e4e020
+  - enabled: 1
     path: Assets/Scenes/Space.unity
     guid: 6e85ea47128f0324db3956c6376ac526
   - enabled: 1
-    path: Assets/Scenes/360VideoScene.unity
-    guid: 8814882c6f9e2c94a8bea73da2e4e020
+    path: Assets/Scenes/VR Game.unity
+    guid: 86bec4866421e494f81f782f2db5a94a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6046bc18b78508e4b9ad8972f3966ce0,
+      type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 67d59d9b38694ef409c54a4b157f73ab,
+      type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: aea5ac26e763d17479a5f477a26cefc6,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: de93bbd3964328944811c62fb340b014,
       type: 2}
