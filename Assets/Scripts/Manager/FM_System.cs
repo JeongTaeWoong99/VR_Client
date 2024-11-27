@@ -34,21 +34,18 @@ public class FM_System : MonoBehaviour
                 {
                     // 각 CMS 플레이어만, RPC 실행
                     _photonView.RPC("RPC_SendMessage", cmsPlayer, _bytesData, message);
-                    Debug.Log("CMS 같음 방 and CMS가 내 화면 보는 있음. -> RPC_SendMessage 작동 O");
+                    Debug.Log("RPC_SendMessage 작동 O.(CMS 같음 방 and CMS가 내 화면 보는 있음)");
                 }
             }
             else
-            {
-                Debug.Log("CMS가 내 화면 보지 않음. -> RPC_SendMessage 작동 X");
-            }
+                Debug.Log("RPC_SendMessage 작동 X.(CMS가 내 화면 보지 않음)");
         }
         else
-        {
-            Debug.Log("CMS 없음 -> RPC_SendMessage 작동 X");
-        }
+            Debug.Log("RPC_SendMessage 작동 X.(CMS 없음)");
     }
     
-    [PunRPC] // 버튼으로 사용 + CMS RPC로도 사용
+    // 버튼으로 사용 + CMS RPC로도 사용
+    [PunRPC]
     public void Watching(bool state)
     {
         isWatching = state;

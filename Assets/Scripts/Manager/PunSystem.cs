@@ -52,7 +52,7 @@ public class PunSystem : MonoBehaviourPunCallbacks
         CloseMenus();
         loadingScreen.SetActive(true);
         feedbackText.gameObject.SetActive(false);
-
+        
         if (!PhotonNetwork.IsConnected) // 게임화면에서, 다시 메인메뉴로 돌아와서, 설정세팅을 하는 경우 방지
         {
             PhotonNetwork.ConnectUsingSettings(); // PhotonServerSettings 파일의 설정들로 네트워킹을 세팅한다.
@@ -124,8 +124,8 @@ public class PunSystem : MonoBehaviourPunCallbacks
         CloseMenus();
         loadingScreen.SetActive(true);
         
-        PlayerPrefs.SetString("roomName", selectedRoomName.text);
-        SceneManager.LoadScene(selectedRoomName.text);
+        PlayerPrefs.SetString("roomName", "VR Game");   // 교육 게임은 모두, "VR Game"이름의 룸으로 들어가도록 함.
+        SceneManager.LoadScene(selectedRoomName.text);  // 씬은 각자의 게임 씬으로 이동.
     }
 
     // 버튼함수
@@ -172,9 +172,9 @@ public class PunSystem : MonoBehaviourPunCallbacks
         foreach (var roomLists in roomList)
         {   
             // 미러링은 방은 검색 안되도록 하기...
-            if(roomLists.Name != "Space" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
+            if(roomLists.Name != "VR Game" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
             {
-                GameObject        newClone   = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
+                GameObject       newClone  = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
                 SharedRoomButton newButton = newClone.GetComponent<SharedRoomButton>();
                 
                 newButton.SettingRoomPanel(roomLists);

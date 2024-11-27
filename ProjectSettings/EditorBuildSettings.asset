@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu Debug.unity
+    path: Assets/Scenes/Main Menu.unity
     guid: 27911b943dfb98f4a820379caef55047
   - enabled: 1
-    path: Assets/Scenes/360VideoScene.unity
+    path: Assets/Scenes/Screen Sharing.unity
     guid: 8814882c6f9e2c94a8bea73da2e4e020
   - enabled: 1
-    path: Assets/Scenes/Space.unity
+    path: Assets/Scenes/Space Game.unity
     guid: 6e85ea47128f0324db3956c6376ac526
   - enabled: 1
-    path: Assets/Scenes/VR Game.unity
+    path: Assets/Scenes/Test Game.unity
     guid: 86bec4866421e494f81f782f2db5a94a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6046bc18b78508e4b9ad8972f3966ce0,

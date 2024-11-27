@@ -10,7 +10,7 @@ public class FadeCanvas : MonoBehaviour
 
     [SerializeField]
     private Renderer fadeQuadRenderer;
-    private float       alpha       = 0.0f;
+    private float    alpha = 0.0f;
 
     public float quickFadeDuration = 1f;
 
@@ -71,7 +71,7 @@ public class FadeCanvas : MonoBehaviour
         }
         
         // 처음 세팅
-        // 미러링방 입장(방이 없어도 입장이 가능하니 -> CreateRoom)
+        // 미러링방 입장(교육 게임방이 없어도 입장이 가능하니 CreateRoom -> 만들기 실패하면, JoinRoom)
         if (isFirstFadeOut && isMirroringScene)
         {
             isFirstFadeOut = false;
@@ -79,12 +79,12 @@ public class FadeCanvas : MonoBehaviour
             RoomOptions options = new RoomOptions();
             options.MaxPlayers  = 20;
             PhotonNetwork.CreateRoom(PlayerPrefs.GetString("roomName"),options);
-            Debug.Log("실행");
         }
         // 쉐어룸 입장(방이 있어야 입장 가능하니 -> JoinRoom)
         else if (isFirstFadeOut && !isMirroringScene)
         {
             isFirstFadeOut = false;
+            
             PhotonNetwork.JoinRoom(PlayerPrefs.GetString("roomName")); // 룸 입장
         }
     }

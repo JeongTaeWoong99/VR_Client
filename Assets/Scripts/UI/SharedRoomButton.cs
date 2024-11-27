@@ -15,7 +15,7 @@ public class SharedRoomButton : MonoBehaviour
     // OnRoomListUpdate에서 방 정보가 업데이트 되고, 텍스트 변경 때 호출
     public void SettingRoomPanel(RoomInfo inputInfo)
     {
-        info = inputInfo;
+        info      = inputInfo;
         string[] splitParts = info.Name.Split('$');
         frontPart = Path.GetFileNameWithoutExtension(splitParts[0]); // 비디오 이름(+확장자 제거)
         backPart  = splitParts[1];                                   // 만든사람 ID

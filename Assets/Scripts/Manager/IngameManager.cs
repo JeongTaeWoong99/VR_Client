@@ -58,8 +58,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     // 방에 입장 완료시 호출(CreateRoom하고 난 후 or 만들어져 있는 방을 룸버튼 클릭하여, 들어가면)
     public override void OnJoinedRoom()
     {
-        Debug.Log("방입장 성공");
-        if(_gameViewEncoder)    // 미러링에서 CreateRoom or JoinRoom으로 성공 시, 라벨 번호 세팅
+        if(_gameViewEncoder) // 미러링에서 CreateRoom or JoinRoom으로 성공 시, 라벨 번호 세팅
             _gameViewEncoder.label = PhotonNetwork.LocalPlayer.ActorNumber; // 엑터 넘버를 라벨 번호로 설정.
     }
     
@@ -67,15 +66,10 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         // 이미 교육용 게임 방이 존재하는 경우
         if (returnCode == 32766)
-        {
-            Debug.Log("방 이미 존재 -> JoinRoom");
             PhotonNetwork.JoinRoom(PlayerPrefs.GetString("roomName")); // Join
-        }
         // 그 외, 오류 표시
         else
-        {
             Debug.Log(returnCode);
-        }
     }
     
     [PunRPC] // 버튼으로 사용 + CMS RPC로도 사용
@@ -96,7 +90,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             fadeCanvas.StartFadeIn(duration);                     // 페이드인                
             yield return new WaitForSeconds(duration);  
             
-            SceneManager.LoadScene("Main Menu Debug"); // Main Menu Test에서 Main Menu으로 돌아가면, 오류.(XR 중복)
+            SceneManager.LoadScene("Main Menu");
         }
     }
 }

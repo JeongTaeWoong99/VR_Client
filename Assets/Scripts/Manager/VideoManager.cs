@@ -34,7 +34,7 @@ public class VideoManager : MonoBehaviour
         FileBrowser.SetExcludedExtensions( ".lnk", ".tmp", ".zip", ".rar", ".exe" ); // 검색 제외
         FileBrowser.AddQuickLink( "Users", "C:\\Users", null);          // 기존 위치
     }
-
+    
     // 입장 버튼(비디오 체크 및 입장)
     public IEnumerator CheckAndJoin(string videoName,string roomName)
     {
@@ -91,8 +91,7 @@ public class VideoManager : MonoBehaviour
 
                         PlayerPrefs.SetString("roomName", roomName);
                         PlayerPrefs.SetString("videoPath", filePath);
-
-                        SceneManager.LoadScene("360VideoScene");
+                        SceneManager.LoadScene("Screen Sharing");
                     }
                     // 파일 이름 동일 + 해쉬 다름 = 씬로드 X
                     else
@@ -134,9 +133,6 @@ public class VideoManager : MonoBehaviour
         PunSystem.instance.loadingScreen.SetActive(true);
         PunSystem.instance.feedbackText.gameObject.SetActive(true);
         PunSystem.instance.feedbackText.text = "동영상을 다운받고 있습니다.";
-    
-        // string desktopPath   = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);  // 데스크탑 바탕화면
-        // string localFilePath = System.IO.Path.Combine(desktopPath, videoName + ".mp4");                     // 저장 및 파일이름 세팅
 
         // 각각의 바탕화면에 저장하도록 함.
         string localFilePath;

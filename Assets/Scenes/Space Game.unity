@@ -4714,6 +4714,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
         type: 3}
+      propertyPath: ClientSettings.UseMainThreadSender
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
+      propertyPath: ServerSettings.UseMainThreadSender
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909626973715989211, guid: 707c52b172ae0644b82688fedef69ef1,
+        type: 3}
       propertyPath: OnReceivedByteDataEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
