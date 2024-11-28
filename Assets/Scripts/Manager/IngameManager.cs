@@ -5,8 +5,9 @@ using Photon.Realtime;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-// 미러링 + 화면 공유 공통 매니저
+// 미러링 + 화면 공유 (공통 매니저)
 // 여기다가 ReturnToMainMenu같은 공통 UI가 들어감
 public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -16,7 +17,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public FadeCanvas fadeCanvas;
     public float      sceneTransitionTime = 2.0f;
     
-    public Button     mainMenuButton;           // 메인메뉴로 돌아가기 버튼
+    private Button returnToMainMenuButton;          // 메인메뉴로 돌아가기 버튼
     
     [Header("미러링")]
     public GameViewEncoder _gameViewEncoder;    // 미러링 전용
@@ -27,6 +28,10 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         
         PhotonNetwork.SendRate          = 10; // 초당 서버로 보내는 패킷 횟수 (기본값 20)
         PhotonNetwork.SerializationRate = 10; // 초당 동기화되는 데이터 횟수 (기본값 10)
+        
+        // 교육생 구분, 접속 플레이어 구분 헤쉬테이블 추가
+        Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
     }
     
     void Start()
@@ -36,6 +41,23 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             SceneManager.LoadScene(0);
         }
+        
+        // ReturnToMainMenu Button 이름을 가진 오브젝트를 찾음
+        GameObject buttonObject = GameObject.Find("ReturnToMainMenu Button");
+        if (buttonObject != null)
+        {
+            returnToMainMenuButton = buttonObject.GetComponent<Button>();
+            if (returnToMainMenuButton != null)
+            {
+                // OnReturnToMainMenu를 버튼 클릭 이벤트에 연결
+                returnToMainMenuButton.onClick.AddListener(OnReturnToMainMenu);
+                Debug.Log("ReturnToMainMenuButton 이벤트가 성공적으로 연결되었습니다.");
+            }
+            else
+                Debug.LogError("Button 컴포넌트를 찾을 수 없습니다.");
+        }
+        else
+            Debug.LogError("'ReturnToMainMenu Button'이라는 이름의 오브젝트를 찾을 수 없습니다.");
     }
     
     public void OnEvent(EventData photonEvent)
@@ -82,7 +104,7 @@ public class IngameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         if (PhotonNetwork.InRoom)
         {
-            mainMenuButton.interactable = false; // 버튼 비활성화(중복 누르기 방지)
+            returnToMainMenuButton.interactable = false; // 버튼 비활성화(중복 누르기 방지)
             
             PhotonNetwork.AutomaticallySyncScene = false;
             PhotonNetwork.Disconnect();                     // 서버와 연결 끊기

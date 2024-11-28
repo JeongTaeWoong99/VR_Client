@@ -104,11 +104,10 @@ public class PunSystem : MonoBehaviourPunCallbacks
             feedbackText.gameObject.SetActive(true);
         
             PhotonNetwork.NickName = PlayerPrefs.GetString("playerName");
+            // 기존 닉네임으로 해쉬값 설정
+            Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
         }
-        
-        // 교육생 구분, 접속 플레이어 구분 헤쉬테이블 추가
-        Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
     }
 
     // 버튼 함수
@@ -198,6 +197,10 @@ public class PunSystem : MonoBehaviourPunCallbacks
             feedbackText.gameObject.SetActive(true);
 
             hasSetNick = true;
+            
+            // 교육생 구분, 접속 플레이어 구분 헤쉬테이블 추가(닉네임 설정하고, 해쉬값 설정되어야 함.)
+            Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
         }
     }
 

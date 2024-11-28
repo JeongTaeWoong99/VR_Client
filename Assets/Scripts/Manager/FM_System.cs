@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 // 미러링 전용
 public class FM_System : MonoBehaviour
@@ -16,9 +15,6 @@ public class FM_System : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        
-        PhotonNetwork.SendRate          = 10; // 초당 서버로 보내는 패킷 횟수 (기본값 20)
-        PhotonNetwork.SerializationRate = 10; // 초당 동기화되는 데이터 횟수 (기본값 10)
     }
 
     public void SendMessage(byte[] _bytesData, string message)
