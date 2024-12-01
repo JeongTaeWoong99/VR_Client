@@ -2,10 +2,12 @@ using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeCanvas : MonoBehaviour
 {
+    [Header("공통")]
     public Coroutine CurrentRoutine { private set; get; } = null;
 
     [SerializeField]
@@ -13,9 +15,12 @@ public class FadeCanvas : MonoBehaviour
     private float    alpha = 0.0f;
 
     public float quickFadeDuration = 1f;
-
-    public  bool isMirroringScene;      // 미러링씬이면
+    
+    public  bool isMirroringScene;      // 미러링씬이면,
     private bool isFirstFadeOut = true; // 맨 처음 들어왔을 때, 세팅 전의 페이드 아웃인가
+    
+    [Header("미러링")]
+    private const string SceneNameKey = "SceneName";    // 미러링에서 화면, 씬 이름 저장을 위함.
 
     private void Awake()
     {
@@ -69,7 +74,7 @@ public class FadeCanvas : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         // 처음 세팅
         // 미러링방 입장(교육 게임방이 없어도 입장이 가능하니 CreateRoom -> 만들기 실패하면, JoinRoom)
         if (isFirstFadeOut && isMirroringScene)

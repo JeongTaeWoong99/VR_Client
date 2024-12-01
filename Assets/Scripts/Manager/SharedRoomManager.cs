@@ -11,6 +11,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     public GameObject[] objectsToHide;
     public Material     videoMaterial;
     public VideoPlayer  videoPlayer;
+    public AudioSource  audioSource;
 
     private Material _skyMaterial;
 
@@ -44,18 +45,26 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
         onCompleteAction.Invoke();
     }
     
-    [PunRPC]    // 슬라이더 이동 동기화
+    [PunRPC]  // 입장시, 상태 동기화
+    public void VideoSetting(bool isPlaying, double currentTime, float currentAudioVolume)
+    {
+        // 세팅 넣어주기(경로(자체) / 시간 / 재생상태 / 볼륨)
+        videoPlayer.url  = PlayerPrefs.GetString("videoPath"); // 동영상 위치를 정적으로 받아서, 바로 넣어주기
+        videoPlayer.time = currentTime;                           // 재생 시간 동기화
+        if (isPlaying) StartVideo();                              // 재생 상태 동기화
+        audioSource.volume = currentAudioVolume;                  // 오디오소스 볼륨 동기화
+    }
+    
+    [PunRPC]    // 시간 슬라이더 이동 동기화
     public void VideoTimeChange(double newTime)
     {
         videoPlayer.time = newTime;
     }
-    
-    [PunRPC]  // 입장시, 상태 동기화
-    public void VideoSetting(bool isPlaying, double currentTime)
+ 
+    [PunRPC]    // 볼륨 슬라이더 이동 동기화
+    public void VolumeChange(float newVolume)
     {
-        // 세팅 넣어주기(경로 / 시간 / 재생상태 등등)
-        videoPlayer.url  = PlayerPrefs.GetString("videoPath"); // 동영상 위치를 정적으로 받아서, 바로 넣어주기
-        videoPlayer.time = currentTime;                           // 재생 시간 동기화
-        if (isPlaying) StartVideo();                              // 재생 상태 동기화
+        audioSource.volume = newVolume;
     }
+    
 }

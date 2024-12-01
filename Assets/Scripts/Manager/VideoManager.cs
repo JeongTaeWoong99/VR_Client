@@ -140,14 +140,14 @@ public class VideoManager : MonoBehaviour
         // 에디터 or 윈도우 빌드
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            string desktopPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             localFilePath      = System.IO.Path.Combine(desktopPath, videoName + ".mp4"); // For desktop builds
         }
-        // 모바일 빌드 or VR빌드
+        // VR빌드(모바일)
         else
         {
-            string mobileOrVRPath = Application.persistentDataPath;
-            localFilePath         = System.IO.Path.Combine(mobileOrVRPath, videoName + ".mp4");
+            string downloadPath = "/storage/emulated/0/Download";
+            localFilePath       = System.IO.Path.Combine(downloadPath, videoName + ".mp4");
         }
 
         StorageReference videoRef = stRef.Child(videoName + ".mp4");    // 저장소 참조 위치

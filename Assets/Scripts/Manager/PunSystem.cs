@@ -42,9 +42,6 @@ public class PunSystem : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
-        
-        PhotonNetwork.SendRate          = 10; // 초당 서버로 보내는 패킷 횟수 (기본값 20)
-        PhotonNetwork.SerializationRate = 10; // 초당 동기화되는 데이터 횟수 (기본값 10)
     }
     
     void Start()

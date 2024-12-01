@@ -27,7 +27,7 @@ public class TriggerZone : MonoBehaviour
             
             AudioManager.instance.Play("Ending");
             
-            StartCoroutine(IngameManager.instance.ReturnToMainMenu(5f));
+            StartCoroutine(InGameManager.instance.ReturnToMainMenu(5f));
         }
     }
 

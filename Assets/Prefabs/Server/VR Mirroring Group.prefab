@@ -225,7 +225,7 @@ MonoBehaviour:
   GZipMode: 0
   PanoramaMode: 0
   Quality: 30
-  StreamFPS: 10
+  StreamFPS: 1
   ignoreSimilarTexture: 1
   similarByteSizeThreshold: 8
   CapturedTexture: {fileID: 0}
@@ -427,7 +427,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2523184439636073877}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &6018841305480177952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 4417170447546909750}
   - component: {fileID: 1107053023165942318}
   m_Layer: 0
-  m_Name: FM_System(+IngameManager)
+  m_Name: FM_System(+InGameManager)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 359360523462031080}
-  isWatching: 0
+  gameViewEncoder: {fileID: 1502787683050085480}
 --- !u!114 &1107053023165942318
 MonoBehaviour:
   m_ObjectHideFlags: 0

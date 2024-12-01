@@ -8,9 +8,11 @@ public class FM_System : MonoBehaviour
 {
     public static FM_System instance;
 
-    public PhotonView       _photonView;
+    public  PhotonView _photonView;
 
-    public bool             isWatching; // CMS가 내 화면을 보고 있는지 여부
+    private bool isWatching; // CMS가 내 화면을 보고 있는지 여부
+
+    public GameViewEncoder gameViewEncoder; // 내 화면을 클릭해서, 빅화면으로 보면 FPS 1 -> 10 으로 변경.
     
     private void Awake()
     {
@@ -28,8 +30,10 @@ public class FM_System : MonoBehaviour
             {
                 foreach (var cmsPlayer in cmsPlayers)
                 {
-                    // 각 CMS 플레이어만, RPC 실행
-                    _photonView.RPC("RPC_SendMessage", cmsPlayer, _bytesData, message);
+                    InGameManager.instance.UpdateDeviceNameAndBattery();
+                    
+                    // 각 CMS 플레이어만, RPC 실행(이미지 바이트 / 베터리 상태)
+                    _photonView.RPC("RPC_SendMessage", cmsPlayer, _bytesData, message, InGameManager.instance.UpdateDeviceNameAndBattery());
                     Debug.Log("RPC_SendMessage 작동 O.(CMS 같음 방 and CMS가 내 화면 보는 있음)");
                 }
             }
@@ -45,5 +49,13 @@ public class FM_System : MonoBehaviour
     public void Watching(bool state)
     {
         isWatching = state;
+    }
+    
+    
+    [PunRPC]
+    public void StreamChange(int changeFps,int changeQuality)
+    {
+        gameViewEncoder.StreamFPS = changeFps;
+        gameViewEncoder.Quality   = changeQuality;
     }
 }

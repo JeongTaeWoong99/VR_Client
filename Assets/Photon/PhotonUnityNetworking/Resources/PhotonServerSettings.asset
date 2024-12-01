@@ -48,6 +48,9 @@ MonoBehaviour:
   - VideoTimeChange
   - VideoSetting
   - Watching
+  - VolumeChange
+  - Test
+  - StreamChange
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
