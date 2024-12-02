@@ -88,7 +88,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     
         videoPlayer.time = newTime;
     }
- 
+    
     [PunRPC]    // 볼륨 슬라이더 이동 동기화
     public void VolumeChange(float newVolume)
     {
@@ -133,8 +133,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     
         // 빌드 상태에 따라서, 각각 다른 위치에서 동영상이 있는지 체크함...
         string localFilePath;
-
-        Debug.Log(videoName);
+        Debug.Log("VideoExistCheck의 " + videoName);
         // 에디터 or 윈도우 빌드
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
@@ -205,22 +204,48 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     // 비디오 다운로드(경로에 없는 경우)
     private IEnumerator VideoDownload(string videoPath)
     {
-        string videoName = Path.GetFileName(videoPath);
-        Debug.Log(videoName);
         settingText.text = "동영상을 다운받고 있습니다.";
         
-        // 저장위치
-        string downloadPath;
+        // // 저장위치
+        // string downloadPath;
+        // // 빌드 상태에 따라서, 각각 다른 위치에서 동영상이 있는지 체크함...
+        // // string localFilePath;
+        //
+        // // 에디터 or 윈도우 빌드
+        // if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        // {
+        //     downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), videoName); // 바탕화면에 저장
+        //     // string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        //     // localFilePath      = Path.Combine(desktopPath, videoName);
+        // }
+        // // VR빌드(모바일)
+        // else
+        // {
+        //     downloadPath = Path.Combine("/storage/emulated/0/Download", videoName);                               // Download 폴더에 저장
+        //     // string downloadPath = "/storage/emulated/0/Download";
+        //     // localFilePath       = Path.Combine(downloadPath, videoName);
+        // }
         
+        // 빌드 상태에 따라서, 각각 다른 위치에서 동영상이 있는지 체크함...
+        
+        string localFilePath;
+        string videoName = Path.GetFileName(videoPath);
+        Debug.Log("VideoDownload의 " + videoName);
         // 에디터 or 윈도우 빌드
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-            downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), videoName); // 바탕화면에 저장
+        {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            localFilePath      = Path.Combine(desktopPath, videoName);
+        }
         // VR빌드(모바일)
         else
-            downloadPath = Path.Combine("/storage/emulated/0/Download", videoName);                               // Download 폴더에 저장
+        {
+            string downloadPath = "/storage/emulated/0/Download";
+            localFilePath       = Path.Combine(downloadPath, videoName);
+        }
         
         StorageReference videoRef = stRef.Child(videoName); // 저장소 참조 위치(Path.GetFileName를 이용하여, videoName에서 경로 부분을 제거함.)
-        Task downloadTask         = videoRef.GetFileAsync(downloadPath);     // 비동기 Task 실행
+        Task downloadTask         = videoRef.GetFileAsync(localFilePath);     // 비동기 Task 실행
         
         yield return new WaitUntil(() => downloadTask.IsCompleted);
         
