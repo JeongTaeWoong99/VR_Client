@@ -15,7 +15,7 @@ using Firebase.Storage;
 public class SharedRoomManager : MonoBehaviourPunCallbacks
 {
     public static SharedRoomManager instance;
-
+    
     private FirebaseStorage  storage;
     private StorageReference stRef;
 
@@ -55,7 +55,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
         // 비디오 세팅이 완료된 상태에만 RPC 작동하도록 함.
         if (!isVideoSetting)
             return;
-            
+        
         Debug.Log("StartVideo");
         FadeAndSwitchVideo(videoMaterial, videoPlayer.Play);
     }
@@ -197,7 +197,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
         
         settingScreen.SetActive(false);
         settingText.text = "동영상 세팅이 완료되었습니다.";
-
+                    
         PlayerStateRenewal(true);   // CMS에게 완료된 상태를 알려주기!
     }
     
