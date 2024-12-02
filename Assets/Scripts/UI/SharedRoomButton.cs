@@ -2,6 +2,7 @@ using System.IO;
 using UnityEngine;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class SharedRoomButton : MonoBehaviour
 {
@@ -24,15 +25,10 @@ public class SharedRoomButton : MonoBehaviour
         makeID_Text.text   = backPart;  // 만든사람 ID 표시
     }
     
-    // 입장 버튼(-> 파일 선택 -> 체크 -> 입장 or 거부)
-    public void OnCheckAndJoin()
+    // 입장 버튼
+    public void OnJoinSharedRoom()
     {   
-        StartCoroutine(VideoManager.instance.CheckAndJoin(frontPart,info.Name));
-    }
-        
-    // 다운 버튼
-    public void OnVideoDownload()
-    {
-        StartCoroutine(VideoManager.instance.VideoDownload(frontPart));
+        PlayerPrefs.SetString("roomName", info.Name);   // 포톤 쉐어룸 방 이름 저장
+        SceneManager.LoadScene("Screen Sharing");       // 쉐어 씬 이동
     }
 }

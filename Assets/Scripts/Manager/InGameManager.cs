@@ -5,7 +5,6 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -62,6 +61,8 @@ public class InGameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         else
             Debug.LogError("'ReturnToMainMenu Button'이라는 이름의 오브젝트를 찾을 수 없습니다.");
+        
+        
     }
     
     public void OnEvent(EventData photonEvent)
@@ -84,7 +85,9 @@ public class InGameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     // 방에 입장 완료시 호출(CreateRoom하고 난 후 or 만들어져 있는 방을 룸버튼 클릭하여, 들어가면)
     public override void OnJoinedRoom()
     {
-        if(_gameViewEncoder) // 미러링에서 CreateRoom or JoinRoom으로 성공 시, 라벨 번호 세팅
+        // 미러링 방
+        // 미러링에서 CreateRoom or JoinRoom으로 성공 시, 라벨 번호 세팅
+        if(_gameViewEncoder) 
             _gameViewEncoder.label = PhotonNetwork.LocalPlayer.ActorNumber; // 엑터 넘버를 라벨 번호로 설정.
     }
     

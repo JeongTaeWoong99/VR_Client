@@ -222,7 +222,7 @@ MonoBehaviour:
   MatchScreenAspect: 1
   FastMode: 1
   AsyncMode: 1
-  GZipMode: 0
+  GZipMode: 1
   PanoramaMode: 0
   Quality: 30
   StreamFPS: 1
