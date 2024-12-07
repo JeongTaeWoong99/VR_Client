@@ -80,7 +80,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     }
     
     [PunRPC]    // 시간 슬라이더 이동 동기화
-    public void VideoTimeChange(double newTime)
+    public void VideoTimeChange(int newTime)
     {
         // 비디오 세팅이 완료된 상태에만 RPC 작동하도록 함.
         if (!isVideoSetting)
@@ -185,7 +185,7 @@ public class SharedRoomManager : MonoBehaviourPunCallbacks
     }
     
     [PunRPC]  // 상태 동기화 (클라 <- CMS)
-    public void VideoSettingAccept(bool isPlaying, double currentTime, float currentAudioVolume)
+    public void VideoSettingAccept(bool isPlaying, int currentTime, float currentAudioVolume)
     {
         isVideoSetting   = true;
         Debug.Log("수락");

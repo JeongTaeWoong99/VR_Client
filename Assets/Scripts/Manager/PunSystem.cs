@@ -42,6 +42,15 @@ public class PunSystem : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
+        
+        Application.targetFrameRate = 60; // 게임 프레임 고정
+        
+        PhotonNetwork.SendRate          = 60;
+        PhotonNetwork.SerializationRate = 60;
+        
+        #if UNITY_EDITOR
+                PlayerPrefs.SetString("playerName", "Editor");
+        #endif
     }
     
     void Start()
@@ -82,8 +91,9 @@ public class PunSystem : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = Random.Range(0, 1000).ToString();
 
-        // 첫 게임접속 후, 로비화면
-        if (!hasSetNick)
+        // 첫 게임접속 후, 로비화면이면서, 닉네임이 설정되어 있지 않은 경우.
+        // 한번 설정하면, 삭제 전까지 쭉~ 고정...
+        if (!hasSetNick && string.IsNullOrEmpty(PlayerPrefs.GetString("playerName")))
         {
             CloseMenus();
             nameInputScreen.SetActive(true);
@@ -161,25 +171,42 @@ public class PunSystem : MonoBehaviourPunCallbacks
     // 로비 내에 룸이 생성되거나 사라질때 자동 호출되는 콜백
     public override void OnRoomListUpdate(List<RoomInfo> roomList) // 자동업데이트
     {
-        foreach(SharedRoomButton rb in allRoomButtons)  // 기존 정보 모두 삭제
-            Destroy(rb.gameObject);
-        allRoomButtons.Clear();
-        
         foreach (var roomLists in roomList)
-        {   
-            // 미러링은 방은 검색 안되도록 하기...
-            if(roomLists.Name != "VR Game" && roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
+        {
+            if(roomLists.Name != "VR Game")
             {
-                GameObject       newClone  = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
-                SharedRoomButton newButton = newClone.GetComponent<SharedRoomButton>();
-                
-                newButton.SettingRoomPanel(roomLists);
-                newButton.gameObject.SetActive(true);
-                allRoomButtons.Add(newButton);
+                // 삭제 호출 -> 방 프리팹 삭제
+                if (roomLists.RemovedFromList)
+                {
+                    //Debug.Log(roomLists.Name + " 방 삭제");
+                    // 그룹에서 텍스트이름 비교하여, 해당 방 프리팹 삭제
+                    foreach (SharedRoomButton rb in allRoomButtons)
+                    {
+                        if(rb.videoNameText.text + ".mp4$" + rb.makeID_Text.text == roomLists.Name)
+                            Destroy(rb.gameObject);
+                    }
+                }
+                // 방 생성 호출 -> 방 프리팹 생성
+                else
+                {
+                    // Debug.Log(roomLists.Name + " | " + (roomLists.PlayerCount != roomLists.MaxPlayers) + " | " + !roomLists.RemovedFromList + " | " + roomLists.IsVisible);
+                    // 미러링은 방은 검색 안되도록 하기...
+                    if(roomLists.PlayerCount != roomLists.MaxPlayers && !roomLists.RemovedFromList && roomLists.IsVisible)
+                    {
+                        //Debug.Log(roomLists.Name + " CMS 방 생성");
+                        GameObject       newClone  = Instantiate(sharedRoomPrefabs, sharedRoomGroup.transform);
+                        SharedRoomButton newButton = newClone.GetComponent<SharedRoomButton>();
+                        
+                        newButton.SettingRoomPanel(roomLists);
+                        newButton.gameObject.SetActive(true);
+                        allRoomButtons.Add(newButton);
+                    }
+                }
             }
         }
+        
     }
-    
+
     // 버튼 함수
     public void SetNickname()
     {

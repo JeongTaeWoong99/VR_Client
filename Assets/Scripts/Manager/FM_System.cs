@@ -34,7 +34,7 @@ public class FM_System : MonoBehaviour
                     
                     // 각 CMS 플레이어만, RPC 실행(이미지 바이트 / 베터리 상태)
                     _photonView.RPC("RPC_SendMessage", cmsPlayer, _bytesData, message, InGameManager.instance.UpdateDeviceNameAndBattery());
-                    Debug.Log("RPC_SendMessage 작동 O.(CMS 같음 방 and CMS가 내 화면 보는 있음)");
+                    Debug.Log("RPC_SendMessage 작동 O.(CMS 같음 방 and CMS가 내 화면 보는 있음)");   
                 }
             }
             else

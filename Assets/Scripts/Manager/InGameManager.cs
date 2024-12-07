@@ -28,6 +28,11 @@ public class InGameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         instance = this;
         
+        Application.targetFrameRate = 60; // 게임 프레임 고정
+        
+        PhotonNetwork.SendRate          = 60;
+        PhotonNetwork.SerializationRate = 60;
+        
         // 교육생 구분, 해쉬분 헤쉬테이블 추가
         Hashtable playerProperties = new Hashtable { { "Trainee", PlayerPrefs.GetString("playerName") } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
